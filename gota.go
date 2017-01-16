@@ -15,15 +15,6 @@ func check(firstMessage string, e error) {
 	}
 }
 
-/*
-func extendPaths(paths []string, ext string) []string {
-	vsm := make([]string, len(paths))
-	for i, v := range paths {
-		vsm[i] = f(v)
-	}
-	return vsm
-}
-*/
 func extendPaths(ext string, paths []string) []string {
 	newCol := make([]string, len(paths))
 	for i, v := range paths {
