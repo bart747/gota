@@ -26,6 +26,16 @@ func extendPaths(ext string, paths []string) []string {
 // create a new page from premade templates
 func CreatePage(filepath string, templates []string) {
 	tmplPaths := extendPaths("templates", templates)
+
+	log.Println("use templates: ")
+	for i, v := range tmplPaths {
+		log.Println(v)
+		if _, err := os.Stat(tmplPaths[i]); err != nil {
+			check("wrong template paths", err)
+			return
+		}
+	}
+
 	tmpl, err := template.ParseFiles(tmplPaths...)
 	check("parse template files", err)
 
@@ -37,7 +47,7 @@ func CreatePage(filepath string, templates []string) {
 
 	file.Close()
 	file.Sync() // flush in-memory copy
-	log.Println(filepath + " created")
+	log.Println("create page: " + filepath)
 
 	return
 }
@@ -91,8 +101,8 @@ func main() {
 	fs := http.FileServer(http.Dir("public"))
 	http.Handle("/", http.StripPrefix("/", fs))
 
-	// you can quickly serve custom pages by locahost:3000/custom/pickSomeTemplate.html
-	http.HandleFunc("/custom/", builders.ServeCustomPage("/custom/", "layout.html"))
+	// you can quickly serve custom pages by locahost:3000/custom/pickSomeContentTemplate.html
+	http.HandleFunc("/custom/", builders.ServeCustomPage("/custom/", "layoutTemplate.html"))
 
 	log.Println(":3000", "Listening...")
 	err := http.ListenAndServe(":3000", nil)
