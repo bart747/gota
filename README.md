@@ -3,7 +3,7 @@
 
 ## Example of use 
 
-'''
+```
 func main() {
 	// create pages by composing templates together with slices:
 	templates := []string{"templates/layout.html", "templates/content.html"}
@@ -21,4 +21,7 @@ func main() {
 		log.Print("server: ", err)
 	}
 }
-'''
+```
+
+The source code is simple. Just look into *gota.go*.
+Coding your own html assembler by using this project as just inspiration might be a good idea.
