@@ -13,7 +13,7 @@ func main() {
 	http.Handle("/", http.StripPrefix("/", fs))
 
 	// you can quickly serve custom pages by locahost:3000/custom/pickSomeContentTemplate.html
-	http.HandleFunc("/custom/", builders.ServeCustomPage("/custom/", "layoutTemplate.html"))
+	http.HandleFunc("/custom/", gota.ServeCustomPage("/custom/", "layoutTemplate.html"))
 
 	log.Println(":3000", "Listening...")
 	err := http.ListenAndServe(":3000", nil)
